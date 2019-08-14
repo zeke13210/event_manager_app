@@ -2,7 +2,7 @@ import React from 'react';
 import { ExpoConfigView } from '@expo/samples';
 import { View, Text } from 'react-native';
 
-export default class SettingsScreen extends React.Component {
+ class ViewEventsScreen extends React.Component {
   
   /**
    * Go ahead and delete ExpoConfigView and replace it with your content;
@@ -10,14 +10,12 @@ export default class SettingsScreen extends React.Component {
    */
   render(){
     return(
-      <View>
-        <Text>Test settings page</Text>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Test View event screen page</Text>
       </View>
     );
     
   }
 }
 
-SettingsScreen.navigationOptions = {
-  title: 'app.json',
-};
+export default ViewEventsScreen

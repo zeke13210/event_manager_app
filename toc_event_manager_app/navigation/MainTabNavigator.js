@@ -1,22 +1,22 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { Ionicons } from '@expo/vector-icons';
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import HomeScreen from '../components/HomeScreen';
+import AddEventScreen from '../components/AddEventScreen';
+import SettingsScreen from '../components/SettingsScreen';
+import ViewEventsScreen from '../components/ViewEventsScreen';
 
-const config = Platform.select({
-  web: { headerMode: 'screen' },
-  default: {},
-});
-
+/*const config = Platform.select({
+ web: { headerMode: 'screen' },
+ default: {},
+}); */
+/*
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
-  },
-  config
+  }
 );
 
 HomeStack.navigationOptions = {
@@ -33,8 +33,9 @@ HomeStack.navigationOptions = {
   ),
 };
 
-HomeStack.path = '';
+HomeStack.path = ''; */
 
+/*
 const LinksStack = createStackNavigator(
   {
     Links: LinksScreen,
@@ -65,14 +66,62 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-SettingsStack.path = '';
+SettingsStack.path = ''; */
 
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
+const tabNavigator = createBottomTabNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      navigationOptions: () => ({
+        title: 'Home'
+      })
+    },
+    AddEvent: {
+      screen: AddEventScreen,
+      navigationOptions: () => ({
+        title: 'Add Event'
+      })
+    },
+    ViewEvent: {
+      screen: ViewEventsScreen,
+      navigationOptions: ()=> ({
+        title: 'View Event'
+      })
+    },
+    Settings: {
+      screen: SettingsScreen,
+      navigationOptions: ()=> ({
+        title: 'Settings'
+      })
+    }
+  },
+  {
+    initialRouteName: 'Home',
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = 'adduser';
+        } else if (routeName === 'ViewEvent') {
+          iconName = 'ios-person';
+        } else if (routeName === 'AddEvent') {
+          iconName = 'ios-add'
+        } else if (routeName === 'Settings') {
+          iconName = 'ios-person'
+        }
+        return <Ionicons name={iconName} size={20} color={tintColor} />
+      }
 
-tabNavigator.path = '';
+    }),
+    tabBarOptions: {
+      activeTintColor: '#FF7200', //orange color
+      inactiveTintColor: '#72e086', // green color
+      style: {
+        backgroundColor: '#0053d8' //navy blue
+      }
+    },
+    
+  });
 
 export default tabNavigator;

@@ -1,4 +1,3 @@
-import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
@@ -8,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import AppNavigator from './navigation/AppNavigator';
 
 export default function App(props) {
-  const [isLoadingComplete, setLoadingComplete] = useState(false);
+  /*const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
@@ -18,16 +17,13 @@ export default function App(props) {
         onFinish={() => handleFinishLoading(setLoadingComplete)}
       />
     );
-  } else {
+  } */
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
+      <AppNavigator />
     );
-  }
+  
 }
-
+/*
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
@@ -59,4 +55,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-});
+}); */
