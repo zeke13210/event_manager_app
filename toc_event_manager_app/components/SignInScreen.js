@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button } from 'react-native-elements';
-import { View, Alert, AsyncStorage } from 'react-native';
+import { Button, Input, Icon } from 'react-native-elements';
+import { View, Alert, AsyncStorage, StyleSheet } from 'react-native';
 import GenerateForm from 'react-native-form-builder';
-
+import db from '../firebase/firebaseConfig';
+import { red } from 'ansi-colors';
 //import AppTabNavigator from './AppTabNavigator';
 
 const fields = [
@@ -33,20 +34,10 @@ class SignInScreen extends React.Component {
     }
   }
 
-  /*componentDidMount() {
-    //start listener and upon firebase login store token in storage
-    this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-       
-        const token = user.email
-        const storeToken = AsyncStorage.setItem('TOKEN', token) //set token in storage
-        console.log("the token is ", token)
-      } else {
-        console.log("Invalid login ")
-      }
-    })
+  componentDidMount() {
+    console.log("This is the db connection: ", db)
 
-  } */
+  }
 
 
 
@@ -55,10 +46,12 @@ class SignInScreen extends React.Component {
       this.unsubscriber(); //stop listener
     }
   } */
-
+  fieldCheck = () => {
+    console.log("function works")
+  }
   signInUser = () => {
     console.log("This is the state: ", this.state)
-    this.props.navigation.navigate('Main')
+    //this.props.navigation.navigate('Main')
 
   }
 
@@ -82,7 +75,7 @@ class SignInScreen extends React.Component {
         this.setState({ password: fields.value })
         break;
     }
-   
+
     return { error, errorMsg }
   }
 
@@ -91,22 +84,29 @@ class SignInScreen extends React.Component {
     this.props.navigation.navigate('Register')
   }
   render() {
-   
+
     return (
-      <View>
-        <GenerateForm
-          ref={(c) => {
-            this.formGenerator = c;
-          }}
-          fields={fields}
-          customValidation={this.validateForm}
-        />
+      <View >
+        <Input 
+          inputContainerStyle={styles.container}
+          placeholder="email"
+          type="email"
+          leftIcon={<Icon name="email"/>}
+          onChangeText={(email) => this.setState({ email })}
+          value={this.state.email} />
+        <Input
+          placeholder="Password"
+          secureTextEntry={true}
+          leftIcon={<Icon name="lock"/>}
+          type="password"
+          onChangeText={(password) => this.setState({ password })}
+          value={this.state.password} />
         <Button
           title="Sign In"
           onPress={this.signInUser} />
 
         <Button
-          title="Sign Up"
+          title="Register"
           onPress={this.registerHandle} />
       </View>
     );
@@ -114,3 +114,11 @@ class SignInScreen extends React.Component {
 }
 
 export default SignInScreen
+
+const styles = StyleSheet.create({
+  container: {
+    borderRadius: 4,
+    borderColor: '#3a66a0',
+    borderWidth: 0.5
+  }
+})

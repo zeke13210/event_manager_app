@@ -1,28 +1,20 @@
 import React from 'react';
-import {
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Text, View, } from 'react-native';
 
 
 class HomeScreen extends React.Component {
-  
+
   /**
    * Go ahead and delete ExpoConfigView and replace it with your content;
    * we just wanted to give you a quick view of your config.
    */
-  render(){
-    return(
+  render() {
+    return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Test home screen</Text>
       </View>
     );
-    
+
   }
 }
 

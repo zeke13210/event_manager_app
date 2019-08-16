@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from '../components/HomeScreen';
 import AddEventScreen from '../components/AddEventScreen';
@@ -110,6 +110,7 @@ const tabNavigator = createBottomTabNavigator(
         } else if (routeName === 'Settings') {
           iconName = 'ios-person'
         }
+        console.log("The icon name is: ", iconName)
         return <Ionicons name={iconName} size={20} color={tintColor} />
       }
 

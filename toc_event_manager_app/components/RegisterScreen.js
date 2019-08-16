@@ -2,6 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 import { Button } from 'react-native-elements'
 import GenerateForm from 'react-native-form-builder';
+import db from '../firebase/firebaseConfig'
+import firebase from 'firebase';
 
 const fields = [
 
@@ -24,7 +26,9 @@ class RegisterScreen extends React.Component {
     super();
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      role: 'user',
+      active: false
     }
   }
 
@@ -34,7 +38,11 @@ class RegisterScreen extends React.Component {
     let password= this.state.password;
 
     firebase.auth().createUserWithEmailAndPassword(email, password) */
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(err => {
+        console.log("Error creating account: ", err);
+    })
     console.log("This is the registered state: ", this.state)
+    db.collection('users').doc(this.state.email).set(this.state)
     this.formGenerator.resetForm();
   }
   

@@ -2865,13 +2865,6 @@ expo-file-system@~6.0.0:
   dependencies:
     uuid-js "^0.7.5"
 
-expo-font@6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/expo-font/-/expo-font-6.0.0.tgz#6616ada2e7e358dd4a8eb1753bd0686a9f654603"
-  integrity sha512-VTKguIfFaCiSrrshts4hQQOngwESdWJ/2frZa/Okbr66noKIVBF8DJE7CH+8cpetn9Xj2JS/dt5ArA6Mk988zQ==
-  dependencies:
-    fontfaceobserver "^2.1.0"
-
 expo-font@~6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/expo-font/-/expo-font-6.0.1.tgz#239b0468edf90d441dca20253c00b334e812c5c5"

@@ -2,7 +2,7 @@ import SignInScreen from '../components/SignInScreen';
 import RegisterScreen from '../components/RegisterScreen';
 import { createStackNavigator } from 'react-navigation';
 
-const AuthStack = createStackNavigator(
+const LoginNavigation = createStackNavigator(
     /*
     User access's stack if not signed in
     Available screens in stack:
@@ -27,4 +27,4 @@ const AuthStack = createStackNavigator(
       initialRouteName: 'SignIn'
     })
 
-    export default AuthStack
+    export default LoginNavigation
