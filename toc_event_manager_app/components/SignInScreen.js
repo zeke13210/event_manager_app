@@ -28,17 +28,25 @@ const fields = [
 class SignInScreen extends React.Component {
   constructor() {
     super();
+    this.unsubscriber = null
     this.state = {
       email: '',
       password: '',
     }
   }
 
-  componentDidMount() {
-    console.log("This is the db connection: ", db)
 
+   componentDidMount(){
+    this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
+      if(user){
+        const token = user.email;
+        AsyncStorage.setItem('TOKEN', token).catch(err => console.log("error storing emaial: ", err))
+        this.props.navigation.navigate('Main')
+      }else{
+        console.log("user is signed out");
+      }
+    })
   }
-
 
 
   /*componentWillMount() {
@@ -46,38 +54,21 @@ class SignInScreen extends React.Component {
       this.unsubscriber(); //stop listener
     }
   } */
-  fieldCheck = () => {
-    console.log("function works")
-  }
-  signInUser = () => {
-    console.log("This is the state: ", this.state)
+  
+  signInUser = async () => {
+    
+    try{
+      await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch(err => console.log("Incorrect password"))
+
+
+    } catch(err){
+      console.log("error signing in user")
+    }
     //this.props.navigation.navigate('Main')
 
   }
 
-  validateForm = (fields) => {
-    /* Need to add complete error handling and figure out how to 
-    use this function to enable and disable button */
-    let error = false;
-    let errorMsg = '';
-
-    switch (fields.name) {
-
-      case 'email':
-        this.setState({ email: fields.value }) //map state to email
-        if (!(fields.value && fields.value.trim())) {
-          //checks if email has value with no whitespace
-          error = true;
-          errorMsg = 'Email required';
-        }
-        break;
-      case 'password':
-        this.setState({ password: fields.value })
-        break;
-    }
-
-    return { error, errorMsg }
-  }
+ 
 
 
   registerHandle = () => {
@@ -96,6 +87,7 @@ class SignInScreen extends React.Component {
           value={this.state.email} />
         <Input
           placeholder="Password"
+          inputContainerStyle={styles.container}
           secureTextEntry={true}
           leftIcon={<Icon name="lock"/>}
           type="password"
@@ -116,9 +108,13 @@ class SignInScreen extends React.Component {
 export default SignInScreen
 
 const styles = StyleSheet.create({
+  //container styling for input fields
   container: {
     borderRadius: 4,
     borderColor: '#3a66a0',
-    borderWidth: 0.5
+    borderWidth: 0.5,
+    padding: 5,
+    marginTop: 5,
+    marginBottom: 5
   }
 })
