@@ -1,9 +1,12 @@
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
-import MainTabNavigator from './MainTabNavigator';
+import UserTabNavigator from './UserTabNavigator';
 import LoginNavigation from './LoginNavigation';
 import AuthLoadingScreen from '../components/AuthLoadingScreen';
+import AdminTabNavigator from './AdminTabNavigator';
+import RoleAuthLoadingScreen from '../components/RoleAuthLoadingScreen';
+
 export default createAppContainer(
   createSwitchNavigator({
     /*
@@ -13,8 +16,10 @@ export default createAppContainer(
       3. Main -- Contains main functionality to add events
 
     */
-    Main: MainTabNavigator,
+    User: UserTabNavigator,
     Login: LoginNavigation,
+    Admin: AdminTabNavigator,
+    Role: RoleAuthLoadingScreen,
     Auth: AuthLoadingScreen
 
   },

@@ -1,19 +1,33 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-//import { Ionicons } from '@expo/vector-icons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { View, Text, AsyncStorage } from 'react-native';
+import { Button } from 'react-native-elements';
+import firebase from 'firebase';
 
 class SettingsScreen extends React.Component {
+  logOut = () => {
+    /*
+     Log out functionality
+     -Sign user out from firebase
+     -remove key from Async storage
+     -navigate screen to Auth stack
+     */
+    try {
+      firebase.auth().signOut();
+      AsyncStorage.removeItem('TOKEN')
+      console.log("Log out successful! ")
+      this.props.navigation.navigate('Auth'); //send back to Auth stack
+    } catch (err) {
+      console.log("Error when logging out: ", err)
+    }
+  }
   
-  /**
-   * Go ahead and delete ExpoConfigView and replace it with your content;
-   * we just wanted to give you a quick view of your config.
-   */
   render(){
     return(
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Test settings page</Text>
-        <Ionicons name='ios-add' size={20} color='#72e086' />
+        <Text>Settings page</Text>
+        <Button
+          title="Log out"
+          onPress={this.logOut} />
       </View>
     );
     

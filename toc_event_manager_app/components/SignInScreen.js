@@ -5,22 +5,8 @@ import GenerateForm from 'react-native-form-builder';
 import db from '../firebase/firebaseConfig';
 import { red } from 'ansi-colors';
 //import AppTabNavigator from './AppTabNavigator';
+import firebase from 'firebase';
 
-const fields = [
-  {
-    type: 'email',
-    name: 'email',
-    required: true,
-    icon: 'ios-mail',
-    label: 'email',
-  },
-  {
-    type: 'password',
-    name: 'password',
-    icon: 'ios-create',
-    label: 'password',
-  }
-];
 
 //SignIn screen of app
 
@@ -37,11 +23,12 @@ class SignInScreen extends React.Component {
 
 
    componentDidMount(){
+     console.log("This is the state: ", this.state)
     this.unsubscriber = firebase.auth().onAuthStateChanged(user => {
       if(user){
         const token = user.email;
         AsyncStorage.setItem('TOKEN', token).catch(err => console.log("error storing emaial: ", err))
-        this.props.navigation.navigate('Main')
+        this.props.navigation.navigate('Role')
       }else{
         console.log("user is signed out");
       }
@@ -59,7 +46,6 @@ class SignInScreen extends React.Component {
     
     try{
       await firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch(err => console.log("Incorrect password"))
-
 
     } catch(err){
       console.log("error signing in user")

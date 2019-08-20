@@ -18,7 +18,7 @@ class AuthLoadingScreen extends React.Component {
         */
         try {
             const userToken = await AsyncStorage.getItem('TOKEN').catch(err => console.log("Error pulling token: ", err))
-            this.props.navigation.navigate(userToken ? 'Main' : 'Login'); //Move to Main or Login stack if token exists
+            this.props.navigation.navigate(userToken ? 'Role' : 'Login'); //Move to Main or Login stack if token exists
 
         } catch (err) {
             console.log("Error is pulling token: ", err)

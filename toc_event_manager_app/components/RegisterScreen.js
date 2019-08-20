@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import { Button } from 'react-native-elements'
 import GenerateForm from 'react-native-form-builder';
 import db from '../firebase/firebaseConfig'
@@ -39,11 +39,12 @@ class RegisterScreen extends React.Component {
 
     firebase.auth().createUserWithEmailAndPassword(email, password) */
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(err => {
-        console.log("Error creating account: ", err);
+        Alert.alert("Error creating account: ", err.toString());
     })
     console.log("This is the registered state: ", this.state)
     db.collection('users').doc(this.state.email).set(this.state)
     this.formGenerator.resetForm();
+    this.props.navigation.navigate('Login')
   }
   
 

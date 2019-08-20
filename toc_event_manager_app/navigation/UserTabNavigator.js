@@ -68,7 +68,7 @@ SettingsStack.navigationOptions = {
 
 SettingsStack.path = ''; */
 
-const tabNavigator = createBottomTabNavigator(
+const UserTabNavigator = createBottomTabNavigator(
   {
     Home: {
       screen: HomeScreen,
@@ -125,4 +125,4 @@ const tabNavigator = createBottomTabNavigator(
     
   });
 
-export default tabNavigator;
+export default UserTabNavigator;
